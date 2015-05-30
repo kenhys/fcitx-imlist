@@ -96,7 +96,6 @@ void set_input_method_list(const gchar *setlist)
   hash = g_hash_table_new(g_str_hash, g_str_equal);
   p = lists;
   for (p = lists; *p; p++, priority++) {
-    g_print("%s\n", *p);
     g_hash_table_insert(hash, *p, GSIZE_TO_POINTER(priority));
   }
   im = get_fcitx_im();
