@@ -101,10 +101,9 @@ void set_input_method_list(const gchar *setlist)
   im = get_fcitx_im();
   if (im) {
     im_list = fcitx_input_method_get_imlist(im);
-    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
     g_ptr_array_sort_with_data(im_list, fcitx_imitem_compare_func, hash);
-    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
     fcitx_input_method_set_imlist(im, im_list);
+    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
     g_object_unref(im);
   }
   g_hash_table_unref(hash);
