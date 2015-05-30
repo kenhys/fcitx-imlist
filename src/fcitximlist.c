@@ -69,7 +69,8 @@ fcitx_imitem_compare_func(gconstpointer a,
   gint priority_a, priority_b;
   GHashTable *hash = user_data;
   gpointer value;
-  priority_a = priority_b = 0;
+
+  priority_a = priority_b = g_hash_table_size(hash) + 1;
 
   value = g_hash_table_lookup(hash, item->unique_name);
   if (value) {
@@ -80,7 +81,7 @@ fcitx_imitem_compare_func(gconstpointer a,
   if (value) {
     priority_b = GPOINTER_TO_SIZE(value);
   }
-  return priority_b - priority_a;
+  return priority_a - priority_b;
 }
 
 void set_input_method_list(const gchar *setlist)
