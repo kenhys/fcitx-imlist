@@ -42,8 +42,8 @@ print_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 {
   FcitxIMItem *item = data;
   if (item->enable || verbose) {
-    printf("%s %s (%s) [%s]\n",
-           item->langcode, item->unique_name, item->name,
+    printf("%s (%s) [%s]\n",
+           item->unique_name, item->name,
            item->enable ? "enabled" : "disabled");
   }
 }
