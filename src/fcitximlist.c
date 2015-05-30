@@ -16,6 +16,27 @@ static GOptionEntry entries[] = {
   { NULL }
 };
 
+static FcitxInputMethod *im;
+
+static
+FcitxInputMethod *
+get_fcitx_im(void)
+{
+  GError* error = NULL;
+  FcitxInputMethod *im;
+
+  im = fcitx_input_method_new(G_BUS_TYPE_SESSION,
+                              G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
+                              fcitx_utils_get_display_number(),
+                              NULL,
+                              &error);
+  if (!im) {
+    g_error_free(error);
+    return;
+  }
+  return im;
+}
+
 int main(int argc, char *argv[])
 {
   GPtrArray *im_list;
