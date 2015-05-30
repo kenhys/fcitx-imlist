@@ -14,16 +14,16 @@ That is why I wrote this experimental program.
 Use `-l` option to list input methods which is enabled.
 
     % fcitx-imlist -l
-    ja fcitx-keyboard-jp (キーボード - 日本語) [enabled]
-    ja mozc (Mozc) [enabled]
-    en fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
+    fcitx-keyboard-jp (キーボード - 日本語) [enabled]
+    mozc (Mozc) [enabled]
+    fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
 
 ## How to change the order of input methods?
 
 Use `-s` option with input methods list to change the order.
 
     % fcitx-imlist -s fcitx-keyboard-us,mozc
-    en fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
-    ja mozc (Mozc) [enabled]
-    ja fcitx-keyboard-jp (キーボード - 日本語) [enabled]
+    fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
+    mozc (Mozc) [enabled]
+    fcitx-keyboard-jp (キーボード - 日本語) [enabled]
 
