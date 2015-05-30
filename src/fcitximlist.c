@@ -59,6 +59,55 @@ void list_input_method(void)
   }
 }
 
+int
+fcitx_imitem_compare_func(gconstpointer a,
+                          gconstpointer b,
+                          gpointer user_data)
+{
+  FcitxIMItem *item = *(FcitxIMItem **)a;
+  FcitxIMItem *item2 = *(FcitxIMItem **)b;
+  gint priority_a, priority_b;
+  GHashTable *hash = user_data;
+  gpointer value;
+  priority_a = priority_b = 0;
+
+  value = g_hash_table_lookup(hash, item->unique_name);
+  if (value) {
+    priority_a = GPOINTER_TO_SIZE(value);
+  }
+
+  value = g_hash_table_lookup(hash, item2->unique_name);
+  if (value) {
+    priority_b = GPOINTER_TO_SIZE(value);
+  }
+  return priority_b - priority_a;
+}
+
+void set_input_method_list(const gchar *setlist)
+{
+  gchar **lists;
+  gchar **p;
+  GHashTable *hash;
+  gint priority = 1;
+  GPtrArray *im_list;
+
+  lists = g_strsplit(setlist, ",", -1);
+  hash = g_hash_table_new(g_str_hash, g_str_equal);
+  p = lists;
+  for (p = lists; *p; p++, priority++) {
+    g_print("%s\n", *p);
+    g_hash_table_insert(hash, *p, GSIZE_TO_POINTER(priority));
+  }
+  im = get_fcitx_im();
+  if (im) {
+    im_list = fcitx_input_method_get_imlist(im);
+    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
+    g_ptr_array_sort_with_data(im_list, fcitx_imitem_compare_func, hash);
+    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
+    g_object_unref(im);
+  }
+}
+
 int main(int argc, char *argv[])
 {
   GPtrArray *im_list;
@@ -77,6 +126,7 @@ int main(int argc, char *argv[])
     if (list) {
       list_input_method();
     } else if (setlist) {
+      set_input_method_list(setlist);
     }
   } else {
     g_print("%s", g_option_context_get_help(context, FALSE, NULL));
