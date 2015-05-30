@@ -37,6 +37,28 @@ get_fcitx_im(void)
   return im;
 }
 
+void
+print_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
+{
+  FcitxIMItem *item = data;
+  if (item->enable || verbose) {
+    printf("%s %s (%s) [%s]\n",
+           item->langcode, item->unique_name, item->name,
+           item->enable ? "enabled" : "disabled");
+  }
+}
+
+void list_input_method(void)
+{
+  GPtrArray *im_list;
+  im = get_fcitx_im();
+  if (im) {
+    im_list = fcitx_input_method_get_imlist(im);
+    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
+    g_object_unref(im);
+  }
+}
+
 int main(int argc, char *argv[])
 {
   GPtrArray *im_list;
@@ -52,6 +74,10 @@ int main(int argc, char *argv[])
   }
 
   if (list || setlist || verbose) {
+    if (list) {
+      list_input_method();
+    } else if (setlist) {
+    }
   } else {
     g_print("%s", g_option_context_get_help(context, FALSE, NULL));
   }
