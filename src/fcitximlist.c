@@ -50,5 +50,11 @@ int main(int argc, char *argv[])
     g_print("option parsing failed: %s\n", error->message);
     exit(1);
   }
+
+  if (list || setlist || verbose) {
+  } else {
+    g_print("%s", g_option_context_get_help(context, FALSE, NULL));
+  }
+
   return 0;
 }
