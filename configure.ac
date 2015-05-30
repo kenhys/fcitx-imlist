@@ -14,6 +14,7 @@ AM_INIT_AUTOMAKE([foreign tar-pax])
 AC_PROG_CC
 
 PKG_CHECK_MODULES([GLIB], glib-2.0)
+PKG_CHECK_MODULES([GIO], gio-2.0)
 PKG_CHECK_MODULES([FCITX_GCLIENT], fcitx-gclient)
 
 # Checks for libraries.
