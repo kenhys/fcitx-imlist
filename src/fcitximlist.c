@@ -107,6 +107,7 @@ void set_input_method_list(const gchar *setlist)
     fcitx_input_method_set_imlist(im, im_list);
     g_object_unref(im);
   }
+  g_strfreev(lists);
 }
 
 int main(int argc, char *argv[])
