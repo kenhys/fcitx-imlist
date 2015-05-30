@@ -4,6 +4,16 @@
 *.obj
 *.elf
 
+# Auto generated files
+.deps
+.libs
+config.h*
+config.status
+config.log
+autom4te.cache
+Makefile
+Makefile.in
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -27,6 +37,8 @@
 *.i*86
 *.x86_64
 *.hex
+fcitx-imlist
 
 # Debug files
 *.dSYM/
+
