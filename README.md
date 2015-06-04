@@ -40,3 +40,9 @@ Use `-s` option with input methods list to change the order.
     mozc (Mozc) [enabled]
     fcitx-keyboard-jp (キーボード - 日本語) [enabled]
 
+Omit `fcitx-keyboard-` prefix if you want.
+
+    % fcitx-imlist -s us,mozc,jp
+    fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
+    mozc (Mozc) [enabled]
+    fcitx-keyboard-jp (キーボード - 日本語) [enabled]
