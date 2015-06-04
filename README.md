@@ -18,6 +18,19 @@ Use `-l` option to list input methods which is enabled.
     mozc (Mozc) [enabled]
     fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
 
+## How to show all input methods?
+
+Use `-l` and `-v` option at the same time to list all input methods.
+
+    % fcitx-imlist -l -v
+    fcitx-keyboard-jp (キーボード - 日本語) [enabled]
+    mozc (Mozc) [enabled]
+    fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
+    fcitx-keyboard-af (キーボード - アフガニスタン語) [disabled]
+    fcitx-keyboard-af-fa-olpc (キーボード - アフガニスタン語 - ペルシア語 (アフガニスタン、ダリー語 OLPC)) [disabled]
+    fcitx-keyboard-af-olpc-ps (キーボード - アフガニスタン語 - パシュト語 (アフガニスタン、OLPC)) [disabled]
+    ...
+
 ## How to change the order of input methods?
 
 Use `-s` option with input methods list to change the order.
