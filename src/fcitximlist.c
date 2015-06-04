@@ -48,6 +48,31 @@ print_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
   }
 }
 
+typedef struct _CheckFcitxIMItem {
+  gchar *name;
+  gboolean exist;
+  gboolean abbrev;
+} CheckFcitxIMItem;
+
+void
+search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
+{
+  FcitxIMItem *item = data;
+  CheckFcitxIMItem *check = user_data;
+  gchar *full_name;
+  if (item->enable) {
+    if (g_strcmp0(item->unique_name, check->name) == 0) {
+      check->exist = TRUE;
+    } else {
+      full_name = g_strdup_printf("fcitx-keyboard-%s", check->name);
+      if (g_strcmp0(item->unique_name, full_name) == 0) {
+        check->abbrev = TRUE;
+      }
+      g_free(full_name);
+    }
+  }
+}
+
 void list_input_method(void)
 {
   GPtrArray *im_list;
@@ -91,16 +116,25 @@ void set_input_method_list(const gchar *setlist)
   GHashTable *hash;
   gint priority = 1;
   GPtrArray *im_list;
+  CheckFcitxIMItem item;
 
   lists = g_strsplit(setlist, ",", -1);
   hash = g_hash_table_new(g_str_hash, g_str_equal);
   p = lists;
-  for (p = lists; *p; p++, priority++) {
-    g_hash_table_insert(hash, *p, GSIZE_TO_POINTER(priority));
-  }
   im = get_fcitx_im();
   if (im) {
     im_list = fcitx_input_method_get_imlist(im);
+    item.exist = FALSE;
+    item.abbrev = FALSE;
+    for (p = lists; *p; p++, priority++) {
+      item.name = *p;
+      g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
+      if (item.exist == FALSE && item.abbrev == TRUE) {
+        g_hash_table_insert(hash, g_strdup_printf("fcitx-keyboard-%s", *p), GSIZE_TO_POINTER(priority));
+      } else {
+        g_hash_table_insert(hash, g_strdup(*p), GSIZE_TO_POINTER(priority));
+      }
+    }
     g_ptr_array_sort_with_data(im_list, fcitx_imitem_compare_func, hash);
     fcitx_input_method_set_imlist(im, im_list);
     g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
