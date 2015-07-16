@@ -5,12 +5,15 @@
 static gchar *list;
 static gchar *setlist;
 static gboolean verbose;
+static gboolean toggle;
 
 static GOptionEntry entries[] = {
   { "list", 'l', 0, G_OPTION_ARG_NONE, &list,
     "List input method", NULL },
   { "set", 's', 0, G_OPTION_ARG_STRING, &setlist,
     "Set input method list separated by ',' for multiple IM", NULL },
+  { "toggle", 't', 0, G_OPTION_ARG_NONE, &toggle,
+    "Toggle keyboard layout", NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose,
     "Be verbose", NULL },
   { NULL }
