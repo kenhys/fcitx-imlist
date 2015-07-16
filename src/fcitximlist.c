@@ -112,30 +112,23 @@ fcitx_imitem_compare_func(gconstpointer a,
   return priority_a - priority_b;
 }
 
-void set_input_method_set(const gchar *setlist)
+void toggle_input_method_set(void)
 {
   GSettings *settings;
   gint n, n_set;
-  gboolean is_newset;
+  gboolean use_default;
   gchar *key, *value;
 
   settings = g_settings_new("org.xdump.fcitximlist");
-  n_set = g_settings_get_int(settings, "fcitx_imlist_set");
-  is_newset = TRUE;
-  for (n = 0; n < n_set; n++) {
-    key = g_strdup_printf("fcitx_imlist_set%d", n + 1);
-    value = g_settings_get_string(settings, key);
-    if (g_strcmp0(value, setlist) == 0) {
-      is_newset = FALSE;
-    }
-    g_free(value);
-    g_free(key);
+  use_default = g_settings_get_boolean(settings, "fcitx-imlist-set");
+  if (!use_default) {
+    value = g_settings_get_string(settings, "fcitx-imlist-alternative");
+  } else {
+    value = g_settings_get_string(settings, "fcitx-imlist-default");
   }
-  if (is_newset) {
-    key = g_strdup_printf("fcitx_imlist_set%d", n_set + 1);
-    g_settings_set_string(settings, key, setlist);
-    g_free(key);
-  }
+  g_settings_set_boolean(settings, "fcitx-imlist-set", !use_default);
+  set_input_method_list(value);
+  g_free(value);
   g_settings_sync();
 }
 
@@ -192,7 +185,6 @@ int main(int argc, char *argv[])
     if (list) {
       list_input_method();
     } else if (setlist) {
-      set_input_method_set(setlist);
       set_input_method_list(setlist);
     }
   } else {
