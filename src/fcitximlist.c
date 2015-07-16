@@ -187,6 +187,8 @@ int main(int argc, char *argv[])
     } else if (setlist) {
       set_input_method_list(setlist);
     }
+  } else if (toggle) {
+    toggle_input_method_set();
   } else {
     g_print("%s", g_option_context_get_help(context, FALSE, NULL));
   }
