@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.xdump.fcitximlist" path="/org/xdump/fcitximlist/" gettext-domain="fcitximlist">
+    <key name="fcitx-imlist-set" type="b">
+      <default>true</default>
+      <summary>Use default set</summary>
+      <description>The value which indicate to use default set.</description>
+    </key>
+    <key name="fcitx-imlist-default" type="s">
+      <default>"jp,mozc"</default>
+      <summary>Default set</summary>
+      <description>The default input method set.</description>
+    </key>
+    <key name="fcitx-imlist-alternative" type="s">
+      <default>"us,mozc"</default>
+      <summary>Alternative set</summary>
+      <description>The alternative input method set.</description>
+    </key>
+  </schema>
+</schemalist>
