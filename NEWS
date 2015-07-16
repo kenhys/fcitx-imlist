@@ -1,0 +1,10 @@
+News of fcitx-imlist
+
+* 0.3.0 (2015-07-17)
+  - Support toggle (-t) option.
+
+* 0.2.0 (2015-06-05)
+  - Support abbrevation in -s option
+
+* 0.1.0 (2015-05-31)
+  - Initial release
