@@ -25,9 +25,12 @@ PKG_CHECK_MODULES([FCITX_GCLIENT], fcitx-gclient)
 
 # Checks for library functions.
 
+GLIB_GSETTINGS
+
 AC_CONFIG_FILES([
 	Makefile		
 	src/Makefile		
+	examples/Makefile
 ])
 
 AC_OUTPUT
