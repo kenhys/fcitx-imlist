@@ -46,3 +46,18 @@ Omit `fcitx-keyboard-` prefix if you want.
     fcitx-keyboard-us (キーボード - 英語 (US)) [enabled]
     mozc (Mozc) [enabled]
     fcitx-keyboard-jp (キーボード - 日本語) [enabled]
+
+## How to toggle input method set?
+
+Use `-t` option to toggle input method set.
+
+The input method set is pre-configured.
+
+Here is the example configuration.
+
+    % gsettings get org.xdump.fcitximlist fcitx-imlist-default
+    'jp,mozc'
+    % gsettings get org.xdump.fcitximlist fcitx-imlist-alternative
+    'us,mozc'
+
+In toggle mode, `fcitx-imlist` command switches above configuration.
