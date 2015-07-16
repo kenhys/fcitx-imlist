@@ -119,7 +119,7 @@ void set_input_method_set(const gchar *setlist)
   gboolean is_newset;
   gchar *key, *value;
 
-  settings = g_settings_new("fcitx_imlist");
+  settings = g_settings_new("org.xdump.fcitximlist");
   n_set = g_settings_get_int(settings, "fcitx_imlist_set");
   is_newset = TRUE;
   for (n = 0; n < n_set; n++) {
