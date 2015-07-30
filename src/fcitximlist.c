@@ -6,6 +6,7 @@ static gchar *list;
 static gchar *setlist;
 static gboolean verbose;
 static gboolean toggle;
+static gchar *keyboard_layout = NULL;
 
 static GOptionEntry entries[] = {
   { "list", 'l', 0, G_OPTION_ARG_NONE, &list,
@@ -14,6 +15,8 @@ static GOptionEntry entries[] = {
     "Set input method list separated by ',' for multiple IM", NULL },
   { "toggle", 't', 0, G_OPTION_ARG_NONE, &toggle,
     "Toggle keyboard layout", NULL },
+  { "enable", 'e', 0, G_OPTION_ARG_STRING, &keyboard_layout,
+    "Enable keyboard layout", NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose,
     "Be verbose", NULL },
   { NULL }
@@ -55,6 +58,7 @@ typedef struct _CheckFcitxIMItem {
   gchar *name;
   gboolean exist;
   gboolean abbrev;
+  gboolean enable;
 } CheckFcitxIMItem;
 
 void
@@ -167,6 +171,36 @@ void set_input_method_list(const gchar *setlist)
   g_strfreev(lists);
 }
 
+void
+change_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
+{
+  FcitxIMItem *item = data;
+  CheckFcitxIMItem *check_item = user_data;
+  if (g_strcmp0(item->unique_name, check_item->name) == 0) {
+    check_item->exist = TRUE;
+    item->enable = check_item->enable;
+  }
+}
+
+void change_input_method_status(const gchar *name, gboolean status)
+{
+  CheckFcitxIMItem item;
+  GPtrArray *im_list;
+  item.name = (gchar *)name;
+  item.enable = status;
+  item.exist = FALSE;
+
+  im = get_fcitx_im();
+  if (im) {
+    im_list = fcitx_input_method_get_imlist(im);
+    g_ptr_array_foreach(im_list, change_fcitx_imitem_foreach_cb, &item);
+    if (item.exist) {
+      fcitx_input_method_set_imlist(im, im_list);
+    }
+    g_object_unref(im);
+  }
+}
+
 int main(int argc, char *argv[])
 {
   GPtrArray *im_list;
@@ -187,6 +221,8 @@ int main(int argc, char *argv[])
     } else if (setlist) {
       set_input_method_list(setlist);
     }
+  } else if (keyboard_layout) {
+    change_input_method_status((const gchar*)keyboard_layout, TRUE);
   } else if (toggle) {
     toggle_input_method_set();
   } else {
