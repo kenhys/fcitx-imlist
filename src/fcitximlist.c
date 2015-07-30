@@ -116,26 +116,6 @@ fcitx_imitem_compare_func(gconstpointer a,
   return priority_a - priority_b;
 }
 
-void toggle_input_method_set(void)
-{
-  GSettings *settings;
-  gint n, n_set;
-  gboolean use_default;
-  gchar *key, *value;
-
-  settings = g_settings_new("org.xdump.fcitximlist");
-  use_default = g_settings_get_boolean(settings, "fcitx-imlist-set");
-  if (!use_default) {
-    value = g_settings_get_string(settings, "fcitx-imlist-alternative");
-  } else {
-    value = g_settings_get_string(settings, "fcitx-imlist-default");
-  }
-  g_settings_set_boolean(settings, "fcitx-imlist-set", !use_default);
-  set_input_method_list(value);
-  g_free(value);
-  g_settings_sync();
-}
-
 void set_input_method_list(const gchar *setlist)
 {
   gchar **lists;
@@ -169,6 +149,26 @@ void set_input_method_list(const gchar *setlist)
   }
   g_hash_table_unref(hash);
   g_strfreev(lists);
+}
+
+void toggle_input_method_set(void)
+{
+  GSettings *settings;
+  gint n, n_set;
+  gboolean use_default;
+  gchar *key, *value;
+
+  settings = g_settings_new("org.xdump.fcitximlist");
+  use_default = g_settings_get_boolean(settings, "fcitx-imlist-set");
+  if (!use_default) {
+    value = g_settings_get_string(settings, "fcitx-imlist-alternative");
+  } else {
+    value = g_settings_get_string(settings, "fcitx-imlist-default");
+  }
+  g_settings_set_boolean(settings, "fcitx-imlist-set", !use_default);
+  set_input_method_list(value);
+  g_free(value);
+  g_settings_sync();
 }
 
 void
