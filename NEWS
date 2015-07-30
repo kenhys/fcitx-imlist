@@ -1,5 +1,8 @@
 News of fcitx-imlist
 
+* 0.4.0 (2015-07-31)
+  - Support enable (-e) option.
+
 * 0.3.0 (2015-07-17)
   - Support toggle (-t) option.
 
