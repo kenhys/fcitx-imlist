@@ -17,6 +17,23 @@ PKG_CHECK_MODULES([GLIB], glib-2.0 >= 2.26)
 PKG_CHECK_MODULES([GIO], gio-2.0)
 PKG_CHECK_MODULES([FCITX_GCLIENT], fcitx-gclient)
 
+# For debug
+AC_ARG_ENABLE(debug,
+  [AS_HELP_STRING([--enable-debug],
+                  [use debug flags (default=no)])],
+  [fcitx_imlist_debug="$enableval"],
+  [fcitx_imlist_debug="no"])
+if test "x$fcitx_imlist_debug" != "xno"; then
+  fcitx_imlist_debug="yes"
+  if test "$CLANG" = "yes"; then
+    CFLAGS="$CFLAGS -O0 -g"
+    CXXFLAGS="$CXXFLAGS -O0 -g"
+  elif test "$GCC" = "yes"; then
+    CFLAGS="$CFLAGS -O0 -g3"
+    CXXFLAGS="$CXXFLAGS -O0 -g3"
+  fi
+fi
+
 # Checks for libraries.
 
 # Checks for header files.
