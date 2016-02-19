@@ -11,8 +11,8 @@ Package: fcitx-imlist
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Command-line utility to switch list of Fcitx IM
-  fcitx-imlist is a small program to show or change input method list.
-  .
-  This software is useful for the people who switch keyboard
-  layout frequently - sometimes use equipped keyboard of mobile PC,
-  sometimes use different layout of external keyboard with that PC.
+ fcitx-imlist is a small program to show or change input method list.
+ .
+ This software is useful for the people who switch keyboard
+ layout frequently - sometimes use equipped keyboard of mobile PC,
+ sometimes use different layout of external keyboard with that PC.
