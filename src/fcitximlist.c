@@ -90,10 +90,10 @@ void list_input_method(void)
     return;
   }
   
-    GPtrArray *im_list;
-    im_list = fcitx_input_method_get_imlist(im);
-    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
-    g_object_unref(im);
+  GPtrArray *im_list;
+  im_list = fcitx_input_method_get_imlist(im);
+  g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
+  g_object_unref(im);
 }
 
 int
