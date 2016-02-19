@@ -70,16 +70,15 @@ search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
   if (!item->enable)
     return;
   
-    if (g_strcmp0(item->unique_name, check->name) == 0) {
-      check->exist = TRUE;
-    } else {
-      gchar *full_name;
-      full_name = g_strdup_printf("fcitx-keyboard-%s", check->name);
-      if (g_strcmp0(item->unique_name, full_name) == 0) {
-        check->abbrev = TRUE;
-      }
-      g_free(full_name);
+  if (g_strcmp0(item->unique_name, check->name) == 0) {
+    check->exist = TRUE;
+  } else {
+    gchar *full_name;
+    full_name = g_strdup_printf("fcitx-keyboard-%s", check->name);
+    if (g_strcmp0(item->unique_name, full_name) == 0) {
+      check->abbrev = TRUE;
     }
+    g_free(full_name);
   }
 }
 
