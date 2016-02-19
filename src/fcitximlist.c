@@ -155,9 +155,8 @@ void set_input_method_list(const gchar *setlist)
 void toggle_input_method_set(void)
 {
   GSettings *settings;
-  gint n, n_set;
   gboolean use_default;
-  gchar *key, *value;
+  gchar *value;
 
   settings = g_settings_new("org.xdump.fcitximlist");
   use_default = g_settings_get_boolean(settings, "fcitx-imlist-set");
@@ -213,7 +212,6 @@ void change_input_method_status(const gchar *name, gboolean status)
 
 int main(int argc, char *argv[])
 {
-  GPtrArray *im_list;
   GOptionContext *context;
   GError *error;
 
