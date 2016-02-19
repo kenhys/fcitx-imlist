@@ -1,0 +1,18 @@
+Source: fcitx-imlist
+Section: utils
+Priority: optional
+Maintainer: HAYASHI Kentaro <kenhys@gmail.com>
+Uploaders: HAYASHI Kentaro <hayashi@clear-code.com>
+Build-Depends: debhelper (>=9),autotools-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/kenhys/fcitx-imlist
+
+Package: fcitx-imlist
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Command-line utility to switch list of Fcitx IM
+  fcitx-imlist is a small program to show or change input method list.
+  .
+  This software is useful for the people who switch keyboard
+  layout frequently - sometimes use equipped keyboard of mobile PC,
+  sometimes use different layout of external keyboard with that PC.
