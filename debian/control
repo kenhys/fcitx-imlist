@@ -3,7 +3,12 @@ Section: utils
 Priority: optional
 Maintainer: HAYASHI Kentaro <kenhys@gmail.com>
 Uploaders: HAYASHI Kentaro <hayashi@clear-code.com>
-Build-Depends: debhelper (>=9),autotools-dev
+Build-Depends:
+  debhelper (>=9),
+  autotools-dev,
+  docbook-xsl,
+  docbook-xml,
+  xsltproc
 Standards-Version: 3.9.6
 Homepage: https://github.com/kenhys/fcitx-imlist
 

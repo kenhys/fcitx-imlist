@@ -13,3 +13,12 @@ export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 %:
 	dh $@  --with autotools_dev
 
+override_dh_auto_build:
+	xsltproc --nonet \
+	--param make.year.ranges 1 \
+	--param make.single.year.ranges 1 \
+	--param man.charmap.use.subset 0 \
+	-o debian/ \
+	http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl \
+	debian/fcitx-imlist.1.xml
+	dh_auto_build
