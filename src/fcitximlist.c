@@ -67,7 +67,9 @@ search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 {
   FcitxIMItem *item = data;
   CheckFcitxIMItem *check = user_data;
-  if (item->enable) {
+  if (!item->enable)
+    return;
+  
     if (g_strcmp0(item->unique_name, check->name) == 0) {
       check->exist = TRUE;
     } else {
