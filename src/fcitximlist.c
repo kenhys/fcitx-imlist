@@ -129,7 +129,10 @@ void set_input_method_list(const gchar *setlist)
   hash = g_hash_table_new(g_str_hash, g_str_equal);
   p = lists;
   im = get_fcitx_im();
-  if (im) {
+  if (!im) {
+    g_warning("Failed to get fcitx im");
+    return;
+  }
     GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     item.exist = FALSE;
