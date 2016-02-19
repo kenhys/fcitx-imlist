@@ -134,24 +134,23 @@ void set_input_method_list(const gchar *setlist)
   lists = g_strsplit(setlist, ",", -1);
   hash = g_hash_table_new(g_str_hash, g_str_equal);
   p = lists;
-    GPtrArray *im_list;
-    im_list = fcitx_input_method_get_imlist(im);
-    item.exist = FALSE;
-    item.abbrev = FALSE;
-    for (p = lists; *p; p++, priority++) {
-      item.name = *p;
-      g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
-      if (item.exist == FALSE && item.abbrev == TRUE) {
-        g_hash_table_insert(hash, g_strdup_printf("fcitx-keyboard-%s", *p), GSIZE_TO_POINTER(priority));
-      } else {
-        g_hash_table_insert(hash, g_strdup(*p), GSIZE_TO_POINTER(priority));
-      }
+  GPtrArray *im_list;
+  im_list = fcitx_input_method_get_imlist(im);
+  item.exist = FALSE;
+  item.abbrev = FALSE;
+  for (p = lists; *p; p++, priority++) {
+    item.name = *p;
+    g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
+    if (item.exist == FALSE && item.abbrev == TRUE) {
+      g_hash_table_insert(hash, g_strdup_printf("fcitx-keyboard-%s", *p), GSIZE_TO_POINTER(priority));
+    } else {
+      g_hash_table_insert(hash, g_strdup(*p), GSIZE_TO_POINTER(priority));
     }
-    g_ptr_array_sort_with_data(im_list, fcitx_imitem_compare_func, hash);
-    fcitx_input_method_set_imlist(im, im_list);
-    g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
-    g_object_unref(im);
   }
+  g_ptr_array_sort_with_data(im_list, fcitx_imitem_compare_func, hash);
+  fcitx_input_method_set_imlist(im, im_list);
+  g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
+  g_object_unref(im);
   g_hash_table_unref(hash);
   g_strfreev(lists);
 }
