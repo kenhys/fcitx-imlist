@@ -76,7 +76,7 @@ man(1), man(7), http://www.tldp.org/HOWTO/Man-Page/
       </author>
     </authorgroup>
     <copyright>
-      <year>2007</year>
+      <year>2016</year>
       <holder>&dhusername;</holder>
     </copyright>
     <legalnotice>
@@ -97,7 +97,7 @@ man(1), man(7), http://www.tldp.org/HOWTO/Man-Page/
   </refmeta>
   <refnamediv>
     <refname>&dhpackage;</refname>
-    <refpurpose>program to do something</refpurpose>
+    <refpurpose>Command-line utility to switch list of Fcitx IM</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
