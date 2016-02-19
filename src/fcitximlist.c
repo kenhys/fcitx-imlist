@@ -67,11 +67,11 @@ search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 {
   FcitxIMItem *item = data;
   CheckFcitxIMItem *check = user_data;
-  gchar *full_name;
   if (item->enable) {
     if (g_strcmp0(item->unique_name, check->name) == 0) {
       check->exist = TRUE;
     } else {
+      gchar *full_name;
       full_name = g_strdup_printf("fcitx-keyboard-%s", check->name);
       if (g_strcmp0(item->unique_name, full_name) == 0) {
         check->abbrev = TRUE;
@@ -83,9 +83,9 @@ search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 
 void list_input_method(void)
 {
-  GPtrArray *im_list;
   im = get_fcitx_im();
   if (im) {
+    GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
     g_object_unref(im);
@@ -123,7 +123,6 @@ void set_input_method_list(const gchar *setlist)
   gchar **p;
   GHashTable *hash;
   gint priority = 1;
-  GPtrArray *im_list;
   CheckFcitxIMItem item;
 
   lists = g_strsplit(setlist, ",", -1);
@@ -131,6 +130,7 @@ void set_input_method_list(const gchar *setlist)
   p = lists;
   im = get_fcitx_im();
   if (im) {
+    GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     item.exist = FALSE;
     item.abbrev = FALSE;
@@ -186,7 +186,6 @@ change_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 void change_input_method_status(const gchar *name, gboolean status)
 {
   CheckFcitxIMItem item;
-  GPtrArray *im_list;
   gboolean abbrev = FALSE;
   item.name = (gchar *)name;
   item.enable = status;
@@ -194,6 +193,7 @@ void change_input_method_status(const gchar *name, gboolean status)
 
   im = get_fcitx_im();
   if (im) {
+    GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
     if (item.exist == FALSE && item.abbrev == TRUE) {
