@@ -199,21 +199,21 @@ void change_input_method_status(const gchar *name, gboolean status)
     return;
   }
   
-    GPtrArray *im_list;
-    im_list = fcitx_input_method_get_imlist(im);
-    g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
-    if (item.exist == FALSE && item.abbrev == TRUE) {
-      abbrev = TRUE;
-      item.name = g_strdup_printf("fcitx-keyboard-%s", name);
-    }
-    g_ptr_array_foreach(im_list, change_fcitx_imitem_foreach_cb, &item);
-    if (item.exist) {
-      fcitx_input_method_set_imlist(im, im_list);
-    }
-    if (abbrev) {
-      g_free(item.name);
-    }
-    g_object_unref(im);
+  GPtrArray *im_list;
+  im_list = fcitx_input_method_get_imlist(im);
+  g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
+  if (item.exist == FALSE && item.abbrev == TRUE) {
+    abbrev = TRUE;
+    item.name = g_strdup_printf("fcitx-keyboard-%s", name);
+  }
+  g_ptr_array_foreach(im_list, change_fcitx_imitem_foreach_cb, &item);
+  if (item.exist) {
+    fcitx_input_method_set_imlist(im, im_list);
+  }
+  if (abbrev) {
+    g_free(item.name);
+  }
+  g_object_unref(im);
 }
 
 int main(int argc, char *argv[])
