@@ -85,12 +85,15 @@ search_fcitx_imitem_foreach_cb(gpointer data, gpointer user_data)
 void list_input_method(void)
 {
   im = get_fcitx_im();
-  if (im) {
+  if (!im) {
+    g_warning("Failed to get fcitx im");
+    return;
+  }
+  
     GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     g_ptr_array_foreach(im_list, print_fcitx_imitem_foreach_cb, NULL);
     g_object_unref(im);
-  }
 }
 
 int
