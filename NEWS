@@ -1,5 +1,9 @@
 News of fcitx-imlist
 
+* 0.5.0 (2016-02-19)
+  - Debianize
+  - Fix some trivial compile warnings
+
 * 0.4.0 (2015-07-31)
   - Support enable (-e) option.
 
