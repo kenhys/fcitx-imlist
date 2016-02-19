@@ -39,7 +39,7 @@ get_fcitx_im(void)
                               &error);
   if (!im) {
     g_error_free(error);
-    return;
+    return NULL;
   }
   return im;
 }
