@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcitx-gclient/fcitxinputmethod.h>
+#include <fcitx-utils/utils.h>
 
 static gchar *list;
 static gchar *setlist;
