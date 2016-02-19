@@ -194,7 +194,11 @@ void change_input_method_status(const gchar *name, gboolean status)
   item.exist = FALSE;
 
   im = get_fcitx_im();
-  if (im) {
+  if (!im) {
+    g_warning("Failed to get fcitx im");
+    return;
+  }
+  
     GPtrArray *im_list;
     im_list = fcitx_input_method_get_imlist(im);
     g_ptr_array_foreach(im_list, search_fcitx_imitem_foreach_cb, &item);
@@ -210,7 +214,6 @@ void change_input_method_status(const gchar *name, gboolean status)
       g_free(item.name);
     }
     g_object_unref(im);
-  }
 }
 
 int main(int argc, char *argv[])
