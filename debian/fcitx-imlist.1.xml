@@ -103,23 +103,36 @@ man(1), man(7), http://www.tldp.org/HOWTO/Man-Page/
     <cmdsynopsis>
       <command>&dhpackage;</command>
       <!-- These are several examples, how syntaxes could look -->
-      <arg choice="plain"><option>-e <replaceable>this</replaceable></option></arg>
-      <arg choice="opt"><option>--example=<parameter>that</parameter></option></arg>
       <arg choice="opt">
         <group choice="req">
-          <arg choice="plain"><option>-e</option></arg>
-          <arg choice="plain"><option>--example</option></arg>
+          <arg choice="plain"><option>-l</option></arg>
+          <arg choice="plain"><option>--list</option></arg>
         </group>
-        <replaceable class="option">this</replaceable>
+      </arg>
+      <arg choice="opt">
+        <group choice="req">
+          <arg choice="plain"><option>-s</option></arg>
+          <arg choice="plain"><option>--set</option></arg>
+        </group>
+        <replaceable class="option">INPUT_METHOD_LIST</replaceable>
+      </arg>
+      <arg choice="opt">
+        <group choice="req">
+          <arg choice="plain"><option>-t</option></arg>
+          <arg choice="plain"><option>--toggle</option></arg>
+        </group>
       </arg>
       <arg choice="opt">
         <group choice="req">
           <arg choice="plain"><option>-e</option></arg>
-          <arg choice="plain"><option>--example</option></arg>
+          <arg choice="plain"><option>--enable</option></arg>
         </group>
+        <replaceable class="option">INPUT_METHOD</replaceable>
+      </arg>
+      <arg choice="opt">
         <group choice="req">
-          <arg choice="plain"><replaceable>this</replaceable></arg>
-          <arg choice="plain"><replaceable>that</replaceable></arg>
+          <arg choice="plain"><option>-v</option></arg>
+          <arg choice="plain"><option>--verbose</option></arg>
         </group>
       </arg>
     </cmdsynopsis>
@@ -132,12 +145,6 @@ man(1), man(7), http://www.tldp.org/HOWTO/Man-Page/
           <group choice="req">
             <arg choice="plain"><option>-h</option></arg>
             <arg choice="plain"><option>--help</option></arg>
-          </group>
-        </arg>
-        <arg choice="plain">
-          <group choice="req">
-            <arg choice="plain"><option>-v</option></arg>
-            <arg choice="plain"><option>--version</option></arg>
           </group>
         </arg>
       </group>
