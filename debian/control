@@ -10,7 +10,8 @@ Build-Depends:
   docbook-xml,
   xsltproc,
   pkg-config,
-  libglib2.0-dev
+  libglib2.0-dev,
+  fcitx-libs-dev
 Standards-Version: 3.9.7
 Homepage: https://github.com/kenhys/fcitx-imlist
 
