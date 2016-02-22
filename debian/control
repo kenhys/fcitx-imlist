@@ -9,7 +9,7 @@ Build-Depends:
   docbook-xsl,
   docbook-xml,
   xsltproc
-Standards-Version: 3.9.6
+Standards-Version: 3.9.7
 Homepage: https://github.com/kenhys/fcitx-imlist
 
 Package: fcitx-imlist
