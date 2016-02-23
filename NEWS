@@ -1,5 +1,8 @@
 News of fcitx-imlist
 
+* 0.5.1 (2016-02-24)
+  - Bundle missing license file
+
 * 0.5.0 (2016-02-19)
   - Debianize
   - Fix some trivial compile warnings
